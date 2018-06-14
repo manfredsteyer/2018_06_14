@@ -1,29 +1,42 @@
+var flights = flights || {};
 
-function Flight(id, from, to, price) {
-    this.from = from;
-    this.to = to;
+(function(root) {
 
-    this.getPrice = function() {
-        return price;
+    var secret = 42;
+
+    function Flight(id, from, to, price) {
+        this.from = from;
+        this.to = to;
+
+        this.getPrice = function() {
+            return price;
+        }
+
+        this.getId = function() {
+            return id;
+        }
     }
 
-    this.getId = function() {
-        return id;
+    function FlightManager() {
+        this.cache = [];
+        this.flightAdded = function() { }
     }
-}
 
-function FlightManager() {
+    FlightManager.prototype.add = function(flight) {
 
-    this.cache = [];
+        if (!flight) {
+            throw new Error('flight must not be empty')
+        }
 
-    this.flightAdded = function() { }
+        if (typeof flight !== 'object') {
+            throw new Error('flight has to be an object')
+        }
 
-    this.add = function(flight) {
         this.cache.push(flight);
         this.flightAdded(flight);
     }
 
-    this.find = function(id) {
+    FlightManager.prototype.find = function(id) {
         for (var i=0; i<this.cache.length; i++) {
             var f = this.cache[i];
             if (f.getId() == id) {
@@ -33,9 +46,24 @@ function FlightManager() {
         return null;
     }
 
-}
+
+    function ExtFlightManager() {
+    }
+
+    ExtFlightManager.prototype = new FlightManager();
+
+    ExtFlightManager.prototype.find = function(id) {
+        console.debug('looking for flight', id);
+        return FlightManager.prototype.find.call(this, id);
+    }
+
+    ExtFlightManager.prototype.count = function() {
+        return this.cache.length;
+    }
+
+    root.ExtFlightManager = ExtFlightManager;
+    root.Flight = Flight;
 
 
-
-
+})(flights);
 
