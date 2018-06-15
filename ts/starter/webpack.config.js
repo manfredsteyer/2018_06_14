@@ -24,6 +24,8 @@ module.exports = {
         ]
     },
     plugins: [
+        // new HtmlPlugin()
+        // CompressionPlugin()
     ],
     node: {
         __filename: true

@@ -1,4 +1,5 @@
 
-export function sayHello(name: string): void {
-    console.debug('Hello ' + name + '!');
+export function sayHello(firstName: string = 'Franz', lastName: string): void {
+    console.debug('Hello ' + firstName + ' ' + lastName + '!');
 }
+
