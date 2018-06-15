@@ -9,10 +9,27 @@
 
 </head>
 <body>
-    <div class="container">
-      Für Infos siehe Konsole ...
-    </div>
     
+  <div class="container">
+    <h1>Flight Search!</h1>
+    <div class="form-group">
+      <label>From:</label>
+      <input name="from" value="Frankfurt" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>To:</label>
+      <input name="to" value="Wien" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <button id="btnSearch" class="btn btn-primary">Search!</button>
+    </div>
+
+    <div id="placeholder">
+
+    </div>
+  </div>
     <script src="dist/vendor.js"></script>
     <script src="dist/app.js"></script>
 </body>
